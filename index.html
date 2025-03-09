@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excel 数据搜索</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .warning {
+            color: red;
+            font-weight: bold;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        #content {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="warning">
+        【法律声明】本演示仅展示已获得用户明确授权的公开信息，禁止用于任何非法用途。
+    </div>
+
+    <h1>Excel 数据搜索</h1>
+    <input type="text" id="searchInput" placeholder="输入姓名">
+    <button onclick="searchData()">搜索</button>
+
+    <div id="result">
+        <h3>搜索结果：</h3>
+        <div id="content"></div>
+    </div>
+
+    <!-- 引入 JSON 数据 -->
+    <script src="data.json"></script>
+
+    <script>
+        // 查询数据
+        function searchData() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = ''; // 清空结果
+
+            if (!query) {
+                alert('请输入搜索内容');
+                return;
+            }
+
+            // 过滤匹配的数据
+            const results = data.filter(item => 
+                item.姓名 && item.姓名.toLowerCase().includes(query)
+            );
+
+            if (results.length > 0) {
+                results.forEach(item => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+                        <p>年级编号：${item.年纪编号}</p>
+                        <p>班级编号：${item.班级编号}</p>
+                        <p>家庭住址：${item.家庭住址}</p>
+                      <p>姓名：${item.姓名}</p>
+                       <p>学籍号：${item.学籍号}</p>
+                      <p>性别：${item.性别}</p>
+                      <p>出生日期：${item.出生日期}</p>
+                      <p>班级编号：${item.班级编号}</p>
+                      <p>班级名称：${item.班级名称}</p>
+                        <hr>
+                    `;
+                    contentDiv.appendChild(div);
+                });
+            } else {
+                contentDiv.innerHTML = '未找到匹配结果';
+            }
+        }
+    </script>
+</body>
+</html>
