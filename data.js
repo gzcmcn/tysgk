@@ -1,4 +1,3 @@
-const fs = require('fs');
 const data = [
     {
         "年级编号": 31,
@@ -23838,4 +23837,3 @@ const data = [
         "家庭住址": "辽宁省抚顺市新抚区西十路12-3 1单元202号"
     }
 ];
-fs.writeFileSync('data.json', JSON.stringify(data));
